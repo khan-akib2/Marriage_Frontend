@@ -9,6 +9,8 @@ export default function LuxuryLoader({ onComplete }) {
   const logoRef = useRef(null);
   const textRef = useRef(null);
   const progressBarRef = useRef(null);
+  const counterRef = useRef(null);
+  const progressTrackRef = useRef(null);
   const loaderBgRef = useRef(null);
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function LuxuryLoader({ onComplete }) {
     );
 
     // Exit animation of inner content
-    tl.to([logoRef.current, textRef.current, progressBarRef.current], {
+    tl.to([logoRef.current, textRef.current, counterRef.current, progressTrackRef.current], {
       opacity: 0,
       scale: 0.95,
       y: -15,
@@ -135,12 +137,12 @@ export default function LuxuryLoader({ onComplete }) {
         </div>
 
         {/* Percentage counter */}
-        <div className="mt-8 text-warm-white font-display text-6xl md:text-7xl font-extralight tracking-[0.1em] drop-shadow-lg">
-          {counter.toString().padStart(3, "0")}
+        <div ref={counterRef} className="mt-8 text-warm-white font-display text-6xl md:text-7xl font-extralight tracking-[0.1em] drop-shadow-lg">
+          {counter}
         </div>
 
         {/* Minimal progress line */}
-        <div className="mt-6 w-48 md:w-64 h-[1px] bg-warm-white/10 rounded-full overflow-hidden relative">
+        <div ref={progressTrackRef} className="mt-6 w-48 md:w-64 h-[1px] bg-warm-white/10 rounded-full overflow-hidden relative">
           <div
             ref={progressBarRef}
             className="absolute top-0 left-0 h-full bg-gradient-to-r from-gold-500 via-gold-300 to-gold-400 shadow-[0_0_8px_#DFB76C]"

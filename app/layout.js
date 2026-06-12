@@ -77,6 +77,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${playfair.variable} ${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
@@ -85,7 +86,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#FAFAF9] text-[#171717] selection:bg-[#5B1C1C] selection:text-white overflow-x-hidden">
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-[#FAFAF9] text-[#171717] selection:bg-[#5B1C1C] selection:text-white overflow-x-hidden">
         {children}
       </body>
     </html>
