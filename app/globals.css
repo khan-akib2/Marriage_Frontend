@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-gold-50: #FAF8F2;
+  --color-gold-100: #F4EFE6;
+  --color-gold-200: #E6D8BF;
+  --color-gold-300: #DFB76C;
+  --color-gold-400: #C5A059;
+  --color-gold-500: #AB8A44;
+  --color-gold-600: #8C6F32;
+  
+  --color-maroon-50: #F9F2F2;
+  --color-maroon-100: #F1E2E2;
+  --color-maroon-200: #E0C1C1;
+  --color-maroon-300: #BD8080;
+  --color-maroon-400: #934343;
+  --color-maroon-500: #5B1C1C;
+  --color-maroon-600: #421010;
+  --color-maroon-700: #2C0808;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ivory: #FFFDF9;
+  --color-warm-white: #FAFAF9;
+  --color-beige: #F4EFE6;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-display: var(--font-playfair), serif;
+  --font-sub: var(--font-cormorant), serif;
+  --font-body: var(--font-inter), sans-serif;
+
+  --animate-shake: shake 0.5s ease-in-out;
+  --animate-zoom-in: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-slide-down: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
   }
+
+  @keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+:root {
+  --background: #FAFAF9;
+  --foreground: #171717;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFFDF9;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5B1C1C;
+}
+
+/* Lenis Smooth Scroll Helper */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Luxury Glassmorphism Utilities */
+.glassmorphism {
+  background: rgba(255, 253, 249, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(223, 183, 108, 0.18);
+}
+
+.glassmorphism-dark {
+  background: rgba(66, 16, 16, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(223, 183, 108, 0.15);
+}
+
+/* Custom Text Mask & Animations helpers */
+.text-stroke-gold {
+  -webkit-text-stroke: 1px #DFB76C;
+  color: transparent;
+}
+
+/* Floating animation for decorative items */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+.animate-float {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* Custom horizontal-scrolling container */
+.horizontal-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+/* Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* GPU Hardware Acceleration for smooth, lag-free scrolling & transitions */
+.parallax-img,
+.timeline-card,
+.event-card,
+.gallery-grid-item,
+.faq-animate,
+.book-animate,
+.location-animate,
+.story-text,
+.story-img,
+.why-left-pin,
+.cta-animate,
+.story-img img,
+.parallax-img img {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
 }
